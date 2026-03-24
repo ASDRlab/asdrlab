@@ -203,9 +203,25 @@
   </div>
 </footer>
 
+
 <script>
+  // Mobile menu
   const _btn = document.getElementById('mobile-menu-btn');
   const _menu = document.getElementById('mobile-menu');
   if (_btn) _btn.addEventListener('click', () => _menu.classList.toggle('hidden'));
+
+  // Members dropdown - click toggle
+  const dropdownTrigger = document.getElementById('members-dropdown-trigger');
+  const dropdownMenu = document.getElementById('members-dropdown-menu');
+  if (dropdownTrigger && dropdownMenu) {
+    dropdownTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownMenu.classList.toggle('open');
+    });
+    document.addEventListener('click', () => {
+      dropdownMenu.classList.remove('open');
+    });
+    dropdownMenu.addEventListener('click', (e) => e.stopPropagation());
+  }
 </script>
 </body></html>
