@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html class="light no-scrollbar" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lab Alumni | ASDR Lab</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary-container": "#24878C", "outline-variant": "#bdc9c9",
+          "surface-container-high": "#f5f5f5", "surface-container": "#ffffff",
+          "on-background": "#1a1c1c", "inverse-primary": "#7cd5da",
+          "surface-container-highest": "#f9fafb", "on-secondary-container": "#656464",
+          "secondary": "#5f5e5e", "on-secondary": "#ffffff",
+          "surface-container-lowest": "#ffffff", "on-surface": "#1a1c1c",
+          "background": "#ffffff", "surface-tint": "#24878C",
+          "primary-fixed-dim": "#7cd5da", "primary-fixed": "#98f1f6",
+          "inverse-on-surface": "#f1f0f0", "on-surface-variant": "#3e4949",
+          "on-primary": "#ffffff", "surface": "#ffffff",
+          "secondary-container": "#e4e2e1", "on-primary-fixed": "#002021",
+          "on-primary-container": "#f3ffff", "error": "#ba1a1a",
+          "on-error": "#ffffff", "primary": "#24878C",
+          "outline": "#e5e7eb", "inverse-surface": "#2f3131"
+        },
+        fontFamily: { "headline": ["Manrope"], "body": ["Inter"], "label": ["Inter"] },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .content-card { background-color: #ffffff; border: 1px solid #f3f4f6; box-shadow: 0 4px 20px -2px rgba(0,0,0,0.03); transition: all 0.3s ease; }
+  .content-card:hover { box-shadow: 0 10px 30px -5px rgba(0,0,0,0.05); border-color: #e5e7eb; }
+
+  .glass-nav {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .nav-link {
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #3e4949;
+    transition: color 0.2s;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #24878C;
+    transition: width 0.2s;
+  }
+  .nav-link:hover { color: #24878C; }
+  .nav-link:hover::after { width: 100%; }
+  .nav-link.active { color: #24878C; }
+  .nav-link.active::after { width: 100%; }
+  .dropdown { position: relative; }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid #f0f0f0;
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 24px -4px rgba(0,0,0,0.10);
+    min-width: 160px;
+    z-index: 100;
+    overflow: hidden;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu a {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #3e4949;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .dropdown-menu a:hover { background: #f4f3f3; color: #24878C; }
+  .dropdown-menu a.active { color: #24878C; background: #f0fafa; }
+</style>
+</head>
+<body class="bg-white text-on-surface antialiased no-scrollbar">
+<!-- Top Navigation Bar -->
+<nav class="glass-nav fixed top-0 left-0 right-0 z-50 border-b border-slate-100">
+  <div class="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2">
+      <span class="font-headline font-extrabold text-primary text-lg tracking-tight">ASDR</span>
+      <span class="font-headline font-medium text-on-surface-variant text-sm hidden sm:block">Lab</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html" class="nav-link ">Home</a>
+      <a href="research.html" class="nav-link ">Research</a>
+      <a href="publications.html" class="nav-link ">Publications</a>
+      <div class="dropdown">
+        <span class="nav-link active" style="cursor:default">Members</span>
+        <div class="dropdown-menu">
+          <a href="pi.html" class="">Principal Investigator</a>
+          <a href="members.html" class="">Current Members</a>
+          <a href="alumni.html" class="active">Alumni</a>
+        </div>
+      </div>
+      <a href="gallery.html" class="nav-link ">Gallery</a>
+      <a href="contact.html" class="nav-link ">Contact</a>
+    </div>
+    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-surface-container transition-colors" aria-label="Open menu">
+      <span class="material-symbols-outlined text-on-surface-variant">menu</span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white">
+    <div class="max-w-7xl mx-auto px-8 py-4 flex flex-col gap-3">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="research.html" class="nav-link">Research</a>
+      <a href="publications.html" class="nav-link">Publications</a>
+      <div class="pl-0">
+        <span class="text-xs font-bold text-primary uppercase tracking-widest block mb-2">Members</span>
+        <div class="pl-4 flex flex-col gap-2">
+          <a href="pi.html" class="nav-link text-sm ">Principal Investigator</a>
+          <a href="members.html" class="nav-link text-sm ">Current Members</a>
+          <a href="alumni.html" class="nav-link text-sm active">Alumni</a>
+        </div>
+      </div>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+  </div>
+</nav>
+<main class="flex flex-col items-center pt-16 py-16 px-4 md:px-12">
+  <header class="w-full max-w-2xl mb-20 mt-8 text-center md:text-left">
+    <div class="inline-block bg-primary/5 px-3 py-1 rounded-full text-primary text-[10px] font-bold tracking-[0.2em] uppercase mb-8">
+      Archive &amp; Legacy
+    </div>
+    <h2 class="text-6xl md:text-7xl font-headline font-extrabold tracking-tight text-on-surface leading-[0.9]">
+      Lab <span class="text-primary italic">Alumni</span>
+    </h2>
+  </header>
+
+  <div class="w-full max-w-2xl space-y-12">
+    <section>
+      <div class="flex items-baseline justify-between mb-8">
+        <span class="text-[11px] font-label uppercase tracking-[0.2em] text-primary font-bold">Past Researchers</span>
+        <span class="text-[10px] font-label uppercase tracking-[0.1em] text-outline-variant font-bold">Graduated Members</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <div class="content-card p-6 rounded-xl border-l-4 border-l-primary flex flex-col gap-4">
+          <div>
+            <span class="text-[9px] font-bold text-primary uppercase tracking-[0.2em] block mb-1">M.S. course in Mechanical Engineering</span>
+            <h5 class="font-headline font-bold text-xl text-on-surface">공지민 (Kong Ji Min)</h5>
+            <p class="text-xs text-on-surface-variant font-medium mt-1">B.S in Mechanical Design Engineering</p>
+            <a class="text-xs text-primary-container hover:underline flex items-center gap-1 mt-2 font-medium" href="mailto:aura6453@kumoh.ac.kr"><span class="material-symbols-outlined text-[14px]">mail</span> aura6453@kumoh.ac.kr</a>
+          </div>
+        </div>
+
+        <div class="content-card p-6 rounded-xl border-l-4 border-l-primary flex flex-col gap-4">
+          <div>
+            <span class="text-[9px] font-bold text-primary uppercase tracking-[0.2em] block mb-1">Alumnus</span>
+            <h5 class="font-headline font-bold text-xl text-on-surface">홍주혁 (Hong Ju Hyuk)</h5>
+            <p class="text-xs text-on-surface-variant font-medium mt-1">B.S in Mechanical Engineering</p>
+            <a class="text-xs text-primary-container hover:underline flex items-center gap-1 mt-2 font-medium" href="mailto:lbfk3605@kumoh.ac.kr"><span class="material-symbols-outlined text-[14px]">mail</span> lbfk3605@kumoh.ac.kr</a>
+          </div>
+        </div>
+
+        <div class="content-card p-6 rounded-xl border-l-4 border-l-primary flex flex-col gap-4">
+          <div>
+            <span class="text-[9px] font-bold text-primary uppercase tracking-[0.2em] block mb-1">Alumnus</span>
+            <h5 class="font-headline font-bold text-xl text-on-surface">김동준 (Kim Dong Jun)</h5>
+            <p class="text-xs text-on-surface-variant font-medium mt-1">B.S in Mechanical Design Engineering</p>
+            <a class="text-xs text-primary-container hover:underline flex items-center gap-1 mt-2 font-medium" href="mailto:ehdwnsvy@kumoh.ac.kr"><span class="material-symbols-outlined text-[14px]">mail</span> ehdwnsvy@kumoh.ac.kr</a>
+          </div>
+        </div>
+
+        <div class="content-card p-6 rounded-xl border-l-4 border-l-primary flex flex-col gap-4">
+          <div>
+            <span class="text-[9px] font-bold text-primary uppercase tracking-[0.2em] block mb-1">Alumnus</span>
+            <h5 class="font-headline font-bold text-xl text-on-surface">김태형 (Kim Tae Hyung)</h5>
+            <p class="text-xs text-on-surface-variant font-medium mt-1">B.S in Mechanical Design Engineering</p>
+            <a class="text-xs text-primary-container hover:underline flex items-center gap-1 mt-2 font-medium" href="mailto:gkfksh12@kumoh.ac.kr"><span class="material-symbols-outlined text-[14px]">mail</span> gkfksh12@kumoh.ac.kr</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</main>
+<!-- Footer -->
+<footer class="mt-16 pt-12 pb-12 border-t border-slate-100 w-full text-center px-8">
+  <div class="max-w-7xl mx-auto">
+    <p class="font-headline font-bold text-primary text-base mb-2">ASDR Lab</p>
+    <p class="text-xs text-slate-400 mb-1">Advanced Surface Devices Research Lab</p>
+    <p class="text-xs text-slate-400 mb-4">Kumoh National Institute of Technology, Gumi, South Korea</p>
+    <div class="flex justify-center gap-6 mb-6">
+      <a href="index.html" class="text-xs text-slate-400 hover:text-primary transition-colors">Home</a>
+      <a href="research.html" class="text-xs text-slate-400 hover:text-primary transition-colors">Research</a>
+      <a href="publications.html" class="text-xs text-slate-400 hover:text-primary transition-colors">Publications</a>
+      <a href="members.html" class="text-xs text-slate-400 hover:text-primary transition-colors">Members</a>
+      <a href="gallery.html" class="text-xs text-slate-400 hover:text-primary transition-colors">Gallery</a>
+      <a href="contact.html" class="text-xs text-slate-400 hover:text-primary transition-colors">Contact</a>
+    </div>
+    <p class="text-xs text-slate-300">&copy; 2026 ASDR Lab. All rights reserved.</p>
+  </div>
+</footer>
+<script>
+  const _btn = document.getElementById('mobile-menu-btn');
+  const _menu = document.getElementById('mobile-menu');
+  if (_btn) _btn.addEventListener('click', () => _menu.classList.toggle('hidden'));
+</script>
+</body></html>

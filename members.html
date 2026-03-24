@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="light no-scrollbar" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Current Members | ASDR Lab</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary-container": "#24878C", "outline-variant": "#bdc9c9",
+          "surface-container-high": "#f5f5f5", "surface-container": "#ffffff",
+          "on-background": "#1a1c1c", "inverse-primary": "#7cd5da",
+          "surface-container-highest": "#f9fafb", "on-secondary-container": "#656464",
+          "secondary": "#5f5e5e", "on-secondary": "#ffffff",
+          "surface-container-lowest": "#ffffff", "on-surface": "#1a1c1c",
+          "background": "#ffffff", "surface-tint": "#24878C",
+          "primary-fixed-dim": "#7cd5da", "primary-fixed": "#98f1f6",
+          "inverse-on-surface": "#f1f0f0", "on-surface-variant": "#3e4949",
+          "on-primary": "#ffffff", "surface": "#ffffff",
+          "secondary-container": "#e4e2e1", "on-primary-fixed": "#002021",
+          "on-primary-container": "#f3ffff", "error": "#ba1a1a",
+          "on-error": "#ffffff", "primary": "#24878C",
+          "outline": "#e5e7eb", "inverse-surface": "#2f3131"
+        },
+        fontFamily: { "headline": ["Manrope"], "body": ["Inter"], "label": ["Inter"] },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .member-card { background: #ffffff; border: 1px solid #f0f0f0; box-shadow: 0 2px 12px -2px rgba(0,0,0,0.05); transition: box-shadow 0.3s ease, transform 0.3s ease; border-radius: 1rem; overflow: hidden; }
+  .member-card:hover { box-shadow: 0 8px 28px -4px rgba(36,135,140,0.10); transform: translateY(-1px); }
+  .member-photo { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+
+  .glass-nav {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .nav-link {
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #3e4949;
+    transition: color 0.2s;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #24878C;
+    transition: width 0.2s;
+  }
+  .nav-link:hover { color: #24878C; }
+  .nav-link:hover::after { width: 100%; }
+  .nav-link.active { color: #24878C; }
+  .nav-link.active::after { width: 100%; }
+  .dropdown { position: relative; }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid #f0f0f0;
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 24px -4px rgba(0,0,0,0.10);
+    min-width: 160px;
+    z-index: 100;
+    overflow: hidden;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu a {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #3e4949;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .dropdown-menu a:hover { background: #f4f3f3; color: #24878C; }
+  .dropdown-menu a.active { color: #24878C; background: #f0fafa; }
+</style>
+</head>
+<body class="bg-white text-on-surface antialiased no-scrollbar">
+<!-- Top Navigation Bar -->
+<nav class="glass-nav fixed top-0 left-0 right-0 z-50 border-b border-slate-100">
+  <div class="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2">
+      <span class="font-headline font-extrabold text-primary text-lg tracking-tight">ASDR</span>
+      <span class="font-headline font-medium text-on-surface-variant text-sm hidden sm:block">Lab</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html" class="nav-link ">Home</a>
+      <a href="research.html" class="nav-link ">Research</a>
+      <a href="publications.html" class="nav-link ">Publications</a>
+      <div class="dropdown">
+        <span class="nav-link active" style="cursor:default">Members</span>
+        <div class="dropdown-menu">
+          <a href="pi.html" class="">Principal Investigator</a>
+          <a href="members.html" class="active">Current Members</a>
+          <a href="alumni.html" class="">Alumni</a>
+        </div>
+      </div>
+      <a href="gallery.html" class="nav-link ">Gallery</a>
+      <a href="contact.html" class="nav-link ">Contact</a>
+    </div>
+    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-surface-container transition-colors" aria-label="Open menu">
+      <span class="material-symbols-outlined text-on-surface-variant">menu</span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white">
+    <div class="max-w-7xl mx-auto px-8 py-4 flex flex-col gap-3">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="research.html" class="nav-link">Research</a>
+      <a href="publications.html" class="nav-link">Publications</a>
+      <div class="pl-0">
+        <span class="text-xs font-bold text-primary uppercase tracking-widest block mb-2">Members</span>
+        <div class="pl-4 flex flex-col gap-2">
+          <a href="pi.html" class="nav-link text-sm ">Principal Investigator</a>
+          <a href="members.html" class="nav-link text-sm active">Current Members</a>
+          <a href="alumni.html" class="nav-link text-sm ">Alumni</a>
+        </div>
+      </div>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+  </div>
+</nav>
+<main class="flex flex-col items-center pt-16 py-16 px-4 md:px-12">
+  <header class="w-full max-w-2xl mb-20 mt-8">
+    <span class="font-label text-base tracking-widest uppercase text-primary font-bold mb-4 block">ASDR Lab · People</span>
+    <h1 class="font-headline text-6xl md:text-7xl font-extrabold tracking-tighter text-on-surface">Members</h1>
+  </header>
+  <div class="w-full max-w-2xl space-y-20">
+
+    <!-- Graduate Students -->
+    <section>
+      <div class="flex items-center gap-4 mb-8">
+        <h2 class="font-body text-sm uppercase tracking-[0.2em] text-primary font-bold whitespace-nowrap">Graduate Students</h2>
+        <div class="h-[1px] flex-grow bg-outline-variant/40"></div>
+        <span class="font-body text-xs uppercase tracking-[0.1em] text-outline-variant font-bold whitespace-nowrap">M.S. &amp; Integrated Course</span>
+      </div>
+      <div class="space-y-4">
+
+        <div class="member-card flex flex-col sm:flex-row items-stretch">
+          <div class="w-full sm:w-32 h-52 sm:h-auto flex-shrink-0 bg-surface-container-high">
+            <img alt="Son Gi Young" class="member-photo" src="https://lh3.googleusercontent.com/aida/ADBb0ujKUzjbQu3wwHtEYoGCbZ4bCUQPV8P0GC3ureNPgiE_4jnN_JCquuxrAsg_VTeQ6PWWOnJkEzkawGEEJhxKLDIcwWEg1xuhJ7GxPbGLbUpx1RTkRFzQ9RaBxb_ukAHK8kRWE7uDGfShQHeBN-9NJF9kX1Hqv5uEzxknW7GtSP-MdC3J6_NMJva2efo8SEx4QNv5AA8HZw58GYQ9Etip09gEad5y3GydXY4lQDGGryXOxq-uhMcKAc7S82Tzcu1Z2g8yKG1mwrgHMQ"/>
+          </div>
+          <div class="flex flex-col flex-grow min-w-0 p-5 gap-2 justify-center">
+            <span class="text-[11px] font-bold text-primary uppercase tracking-[0.15em]">M.S. (2024.09~)</span>
+            <h5 class="font-headline font-bold text-lg text-on-surface leading-tight">Son Gi Young <span class="text-sm font-normal text-on-surface-variant">손기영</span></h5>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Triboelectric nanogenerators, tribology.</p>
+            <p class="text-xs italic text-on-surface-variant opacity-60">"May my work be worth more than life"</p>
+            <a class="text-xs text-primary hover:underline flex items-center gap-1 font-medium mt-1" href="mailto:son53261@kumoh.ac.kr"><span class="material-symbols-outlined text-[14px]">mail</span> son53261@kumoh.ac.kr</a>
+          </div>
+        </div>
+
+        <div class="member-card flex flex-col sm:flex-row items-stretch">
+          <div class="w-full sm:w-32 h-52 sm:h-auto flex-shrink-0 bg-surface-container-high">
+            <img alt="Seo Dong Won" class="member-photo" src="https://lh3.googleusercontent.com/aida/ADBb0uhiuglANmcxbPfPz3T3qtDaeWBveXQi2Kg5mDgbmohEoHqVyROKb57j3XDnk8esfMwMr-QZvvDboTDDWR80OZfW4wET4JYFNrwbppxkpnZv7i52skya1Prn3MAK-BMx_7VKgONino7zYUKVlyMM_Fnj_iIME8t41kjJUIXx_QwWg-Yh9NWm6r9fmjYmUYNAhfnpo1csgunfbMlL3Kcy4dt7SBhGD0v79u9SuNuxWf6p0X6M-OesA-_PhvHPL2ROXw1dCFlyFWRkCw"/>
+          </div>
+          <div class="flex flex-col flex-grow min-w-0 p-5 gap-2 justify-center">
+            <span class="text-[11px] font-bold text-primary uppercase tracking-[0.15em]">M.S. (2024.09~)</span>
+            <h5 class="font-headline font-bold text-lg text-on-surface leading-tight">Seo Dong Won <span class="text-sm font-normal text-on-surface-variant">서동원</span></h5>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Energy harvesting devices, MOFs, Artificial Intelligence.</p>
+            <p class="text-xs italic text-on-surface-variant opacity-60">"The die is cast"</p>
+            <a class="text-xs text-primary hover:underline flex items-center gap-1 font-medium mt-1" href="mailto:sdw2051@kumoh.ac.kr"><span class="material-symbols-outlined text-[14px]">mail</span> sdw2051@kumoh.ac.kr</a>
+          </div>
+        </div>
+
+        <div class="member-card flex flex-col sm:flex-row items-stretch">
+          <div class="w-full sm:w-32 h-52 sm:h-auto flex-shrink-0 bg-surface-container-high">
+            <img alt="Kim Seok Jin" class="member-photo" src="https://lh3.googleusercontent.com/aida/ADBb0uiUZD4Rn5W5rzicbJVhE4kTYlhHZPS0hyR-K6i_XT7EOtFMcgYsFWWdFt1mqiJvbxnPAxNhEUqOsYrcJa2xSfQLcX8XBEz9MnIJBlKnYxGeaX3cHbRcq5wTTGmQ8eDw1Dl0SV9DV_YbkcKFZJiRY9PcIG1fovPIcf5Kmt1PeffuTTiTT5hhNkaEswXVT1I8G-3r6DD1mg5afk6p5eanFDeRZSCSnuVhFPlNSIwZI6XdKezqFRDSU6cXYku0tx18z1eVp-mCOvk6yw"/>
+          </div>
+          <div class="flex flex-col flex-grow min-w-0 p-5 gap-2 justify-center">
+            <span class="text-[11px] font-bold text-primary uppercase tracking-[0.15em]">M.S. (2025.03~)</span>
+            <h5 class="font-headline font-bold text-lg text-on-surface leading-tight">Kim Seok Jin <span class="text-sm font-normal text-on-surface-variant">김석진</span></h5>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Micro/nano-composites, triboelectric/flexoelectric nanogenerators.</p>
+            <p class="text-xs italic text-on-surface-variant opacity-60">"Only I can change my life"</p>
+            <a class="text-xs text-primary hover:underline flex items-center gap-1 font-medium mt-1" href="mailto:szkim@kumoh.ac.kr"><span class="material-symbols-outlined text-[14px]">mail</span> szkim@kumoh.ac.kr</a>
+          </div>
+        </div>
+
+        <div class="member-card flex flex-col sm:flex-row items-stretch">
+          <div class="w-full sm:w-32 h-52 sm:h-auto flex-shrink-0 bg-surface-container-high">
+            <img alt="Kim Kyoung Hwan" class="member-photo" src="https://lh3.googleusercontent.com/aida/ADBb0uiGZ-wlfYj6ddHh4e53wxaGXHu_xPq7WTLtab44SxZJUqXwWk9S3IAmtG2wEO3tBhoFkQBaH-4r9Vn6SnOKaLUrGYOCuxaWKhlNvqU59VF6h1y9pq4772K-110D9ynuMyJ9NZGX_KZbCQYTMbJ3kV3d7DZcrhVxVbaHy5yOycP5V0mMlr2oD0tPvMl58W7fZDB6efKvR6qYH2cSoiiACzKs0AvrE_7a7vgDQztAkRakXBth4-qN2CncBeOB2GowjHhJq8sR1gS9lw"/>
+          </div>
+          <div class="flex flex-col flex-grow min-w-0 p-5 gap-2 justify-center">
+            <span class="text-[11px] font-bold text-primary uppercase tracking-[0.15em]">B.S.&amp;M.S. Integrated (2024.03~)</span>
+            <h5 class="font-headline font-bold text-lg text-on-surface leading-tight">Kim Kyoung Hwan <span class="text-sm font-normal text-on-surface-variant">김경환</span></h5>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Material synthesis, TENG, environmental treatment.</p>
+            <p class="text-xs italic text-on-surface-variant opacity-60">"Your efforts will never betray you."</p>
+            <a class="text-xs text-primary hover:underline flex items-center gap-1 font-medium mt-1" href="mailto:aprzlsej123@kumoh.ac.kr"><span class="material-symbols-outlined text-[14px]">mail</span> aprzlsej123@kumoh.ac.kr</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Undergraduate Researchers -->
+    <section>
+      <div class="flex items-center gap-4 mb-8">
+        <h2 class="font-body text-sm uppercase tracking-[0.2em] text-primary font-bold whitespace-nowrap">Undergraduate Research Assistants</h2>
+        <div class="h-[1px] flex-grow bg-outline-variant/40"></div>
+        <span class="font-body text-xs uppercase tracking-[0.1em] text-outline-variant font-bold whitespace-nowrap">Research Interns</span>
+      </div>
+      <div class="space-y-4">
+        <div class="member-card flex flex-col sm:flex-row items-stretch">
+          <div class="w-full sm:w-32 h-52 sm:h-auto flex-shrink-0 bg-surface-container-high">
+            <img alt="Seo Dae Kyoung" class="member-photo" src="https://lh3.googleusercontent.com/aida/ADBb0ui8vCvAUgboJJboq-6sK6bNDsvLFKUzJ1zuqtJBSjbrGP_C5vNeiYu9frtuA5Gg_T1jqxQ9n6xUVxx3g5mfSxOD51rMMouw49UpxiWKzhHJmWHGP6sqf35SpXFNlPJ46HSlAolyv2-nfu-u_RMS8bsBokQIgwGb7H1HuwYQoZLWRcBV7AMt3_BlaH1ITFnQ1-anDpbLB8RQj53-yQtZFd33jt0Yh66ejXdmhha3_m4zXicJJ5yvPVzu3nGWk32tPaA7I2BqO4aa"/>
+          </div>
+          <div class="flex flex-col flex-grow min-w-0 p-5 gap-2 justify-center">
+            <span class="text-[11px] font-bold text-primary uppercase tracking-[0.15em]">UG Student (exp. 2027)</span>
+            <h5 class="font-headline font-bold text-lg text-on-surface leading-tight">Seo Dae Kyoung <span class="text-sm font-normal text-on-surface-variant">서대경</span></h5>
+            <p class="text-sm text-on-surface-variant leading-relaxed">Material synthesis, hydrovoltaic harvester, TENG.</p>
+            <p class="text-xs italic text-on-surface-variant opacity-60">"Just do it."</p>
+            <a class="text-xs text-primary hover:underline flex items-center gap-1 font-medium mt-1" href="mailto:kingdum0515@kumoh.ac.kr"><span class="material-symbols-outlined text-[14px]">mail</span> kingdum0515@kumoh.ac.kr</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+<!-- Footer -->
+<footer class="mt-16 pt-12 pb-12 border-t border-slate-100 w-full text-center px-8">
+  <div class="max-w-7xl mx-auto">
+    <p class="font-headline font-bold text-primary text-base mb-2">ASDR Lab</p>
+    <p class="text-xs text-slate-400 mb-1">Advanced Surface Devices Research Lab</p>
+    <p class="text-xs text-slate-400 mb-4">Kumoh National Institute of Technology, Gumi, South Korea</p>
+    <div class="flex justify-center gap-6 mb-6">
+      <a href="index.html" class="text-xs text-slate-400 hover:text-primary transition-colors">Home</a>
+      <a href="research.html" class="text-xs text-slate-400 hover:text-primary transition-colors">Research</a>
+      <a href="publications.html" class="text-xs text-slate-400 hover:text-primary transition-colors">Publications</a>
+      <a href="members.html" class="text-xs text-slate-400 hover:text-primary transition-colors">Members</a>
+      <a href="gallery.html" class="text-xs text-slate-400 hover:text-primary transition-colors">Gallery</a>
+      <a href="contact.html" class="text-xs text-slate-400 hover:text-primary transition-colors">Contact</a>
+    </div>
+    <p class="text-xs text-slate-300">&copy; 2026 ASDR Lab. All rights reserved.</p>
+  </div>
+</footer>
+<script>
+  const _btn = document.getElementById('mobile-menu-btn');
+  const _menu = document.getElementById('mobile-menu');
+  if (_btn) _btn.addEventListener('click', () => _menu.classList.toggle('hidden'));
+</script>
+</body></html>
