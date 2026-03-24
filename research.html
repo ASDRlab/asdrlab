@@ -82,13 +82,27 @@
     background: linear-gradient(to bottom, transparent, #00666b 10%, #00666b 90%, transparent);
     z-index: 0;
   }
-
   .dropdown { position: relative; }
-  .dropdown-menu { display: none; position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: white; border: 1px solid #f0f0f0; border-radius: 0.75rem; box-shadow: 0 8px 24px -4px rgba(0,0,0,0.10); min-width: 160px; z-index: 100; overflow: hidden; }
-  .dropdown:hover .dropdown-menu { display: block; }
-  .dropdown-menu a { display: block; padding: 0.6rem 1.2rem; font-size: 0.8rem; font-weight: 500; color: #3e4949; transition: background 0.15s, color 0.15s; white-space: nowrap; }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid #f0f0f0;
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 24px -4px rgba(0,0,0,0.10);
+    min-width: 180px;
+    z-index: 100;
+    overflow: hidden;
+    padding: 4px 0;
+  }
+  .dropdown-menu.open { display: block; }
+  .dropdown-menu a { display: block; padding: 0.65rem 1.2rem; font-size: 0.8rem; font-weight: 500; color: #3e4949; transition: background 0.15s, color 0.15s; white-space: nowrap; }
   .dropdown-menu a:hover { background: #f4f3f3; color: #00666b; }
-  </style>
+  .dropdown-menu a.active { color: #00666b; background: #f0fafa; }
+</style>
 </head>
 <body class="bg-white text-on-surface font-body no-scrollbar">
 
@@ -99,22 +113,21 @@
       <img src="Lab-Logo.jpg" alt="ASDR Lab" class="h-9 w-auto object-contain"/>
     </a>
     <div class="hidden md:flex items-center gap-8">
-      <a href="index.html" class="nav-link ">Home</a>
+      <a href="index.html" class="nav-link">Home</a>
       <a href="research.html" class="nav-link active">Research</a>
       <div class="dropdown">
-        <button id="members-dropdown-trigger" class="nav-link " style="background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;gap:4px;">
-          Members
-          <span style="font-size:10px;opacity:0.6;">▾</span>
+        <button id="members-dropdown-trigger" class="nav-link" style="background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;gap:4px;">
+          Members <span style="font-size:10px;opacity:0.6;">▾</span>
         </button>
         <div id="members-dropdown-menu" class="dropdown-menu">
-          <a href="pi.html" class="">Principal Investigator</a>
-          <a href="members.html" class="">Current Members</a>
-          <a href="alumni.html" class="">Alumni</a>
+          <a href="pi.html">Principal Investigator</a>
+          <a href="members.html">Current Members</a>
+          <a href="alumni.html">Alumni</a>
         </div>
       </div>
-      <a href="publications.html" class="nav-link ">Publications</a>
-      <a href="gallery.html" class="nav-link ">Gallery</a>
-      <a href="contact.html" class="nav-link ">Contact</a>
+      <a href="publications.html" class="nav-link">Publications</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="contact.html" class="nav-link">Contact</a>
     </div>
     <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-surface-container transition-colors" aria-label="Open menu">
       <span class="material-symbols-outlined text-on-surface-variant">menu</span>
@@ -123,13 +136,13 @@
   <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white">
     <div class="max-w-7xl mx-auto px-8 py-4 flex flex-col gap-3">
       <a href="index.html" class="nav-link">Home</a>
-      <a href="research.html" class="nav-link">Research</a>
+      <a href="research.html" class="nav-link active">Research</a>
       <div class="pl-0">
         <span class="text-xs font-bold text-primary uppercase tracking-widest block mb-2">Members</span>
         <div class="pl-4 flex flex-col gap-2">
-          <a href="pi.html" class="nav-link text-sm ">Principal Investigator</a>
-          <a href="members.html" class="nav-link text-sm ">Current Members</a>
-          <a href="alumni.html" class="nav-link text-sm ">Alumni</a>
+          <a href="pi.html" class="nav-link text-sm">Principal Investigator</a>
+          <a href="members.html" class="nav-link text-sm">Current Members</a>
+          <a href="alumni.html" class="nav-link text-sm">Alumni</a>
         </div>
       </div>
       <a href="publications.html" class="nav-link">Publications</a>
@@ -393,9 +406,20 @@
 </footer>
 
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+  const _btn = document.getElementById('mobile-menu-btn');
+  const _menu = document.getElementById('mobile-menu');
+  if (_btn) _btn.addEventListener('click', () => _menu.classList.toggle('hidden'));
+
+  const dropdownTrigger = document.getElementById('members-dropdown-trigger');
+  const dropdownMenu = document.getElementById('members-dropdown-menu');
+  if (dropdownTrigger && dropdownMenu) {
+    dropdownTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownMenu.classList.toggle('open');
+    });
+    document.addEventListener('click', () => dropdownMenu.classList.remove('open'));
+    dropdownMenu.addEventListener('click', (e) => e.stopPropagation());
+  }
 </script>
 
 </body>
