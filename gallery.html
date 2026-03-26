@@ -45,26 +45,53 @@
   .dropdown-menu a { display: block; padding: 0.65rem 1.2rem; font-size: 0.8rem; font-weight: 500; color: #3e4949; transition: background 0.15s, color 0.15s; white-space: nowrap; }
   .dropdown-menu a:hover { background: #f4f3f3; color: #00666b; }
 
-  .masonry { columns: 2; column-gap: 12px; }
-  @media (min-width: 640px)  { .masonry { columns: 3; } }
-  @media (min-width: 1024px) { .masonry { columns: 4; } }
+  /* ── Grid: uniform 4:3 tiles ── */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  @media (min-width: 640px)  { .photo-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1024px) { .photo-grid { grid-template-columns: repeat(4, 1fr); } }
 
-  .masonry-item { break-inside: avoid; margin-bottom: 12px; border-radius: 0.75rem; overflow: hidden; cursor: pointer; position: relative; background: #f0f0f0; }
-  .masonry-item img { width: 100%; display: block; transition: transform 0.5s ease, filter 0.3s ease; opacity: 0; }
-  .masonry-item img.loaded { opacity: 1; transition: opacity 0.4s ease, transform 0.5s ease, filter 0.3s ease; }
-  .masonry-item:hover img { transform: scale(1.04); filter: brightness(0.88); }
-  .masonry-item::after {
+  .photo-item {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    cursor: pointer;
+    background: #e8e8e8;
+  }
+  .photo-item img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.5s ease, filter 0.3s ease;
+  }
+  .photo-item img.loaded { opacity: 1; }
+  .photo-item:hover img { transform: scale(1.05); filter: brightness(0.82); }
+  .photo-item::after {
     content: "\e8ff";
     font-family: 'Material Symbols Outlined';
-    font-size: 28px; color: white;
+    font-size: 26px; color: white;
     position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%) scale(0.7);
     opacity: 0; transition: opacity 0.25s, transform 0.25s;
-    pointer-events: none; text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    pointer-events: none; text-shadow: 0 2px 8px rgba(0,0,0,0.5);
   }
-  .masonry-item:hover::after { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .photo-item:hover::after { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
-  .skeleton-block { background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 0.75rem; margin-bottom: 12px; break-inside: avoid; }
+  /* skeleton uses same grid / aspect-ratio */
+  .skeleton-item {
+    aspect-ratio: 4 / 3;
+    border-radius: 0.75rem;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e4 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+  }
   @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
   #lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(10,10,10,0.95); align-items: center; justify-content: center; }
@@ -75,8 +102,7 @@
   #lightbox-close:hover { color: white; }
   .lb-arrow { position: absolute; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.55); cursor: pointer; font-size: 52px; line-height: 1; padding: 0 18px; transition: color 0.2s; user-select: none; font-weight: 200; }
   .lb-arrow:hover { color: white; }
-  #lb-prev { left: 0; }
-  #lb-next { right: 0; }
+  #lb-prev { left: 0; } #lb-next { right: 0; }
   #lb-counter { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.4); font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: 0.1em; }
 
   .section-tab { transition: all 0.2s; cursor: pointer; background: none; border: none; outline: none; }
@@ -91,7 +117,7 @@
 <div id="lightbox" role="dialog" aria-modal="true">
   <span id="lightbox-close" title="Close (Esc)">&times;</span>
   <span class="lb-arrow" id="lb-prev">&#8249;</span>
-  <img id="lightbox-img" src="" alt="Gallery photo"/>
+  <img id="lightbox-img" src="" alt=""/>
   <span class="lb-arrow" id="lb-next">&#8250;</span>
   <div id="lb-counter"></div>
 </div>
@@ -168,12 +194,8 @@
         <h3 class="text-lg font-headline font-bold text-on-surface">Conferences &amp; Symposia</h3>
         <p class="text-xs text-outline mt-0.5 tracking-widest uppercase">Presentations &amp; Academic Events</p>
       </div>
-      <a href="https://drive.google.com/drive/folders/1dJAe9mPmnW9xVHwr_Mb8Q4a9JDYfHxtY" target="_blank"
-         class="flex items-center gap-1.5 text-xs text-primary font-semibold hover:underline">
-        <span class="material-symbols-outlined text-sm">folder_open</span>Open in Drive
-      </a>
     </div>
-    <div id="grid-conferences" class="masonry"></div>
+    <div id="grid-conferences" class="photo-grid"></div>
     <div id="empty-conferences" class="hidden text-center py-24 text-on-surface-variant">
       <span class="material-symbols-outlined text-5xl opacity-30 mb-3 block">photo_library</span>
       <p class="text-sm">No photos yet.</p>
@@ -186,12 +208,8 @@
         <h3 class="text-lg font-headline font-bold text-on-surface">Lab Socials &amp; Traditions</h3>
         <p class="text-xs text-outline mt-0.5 tracking-widest uppercase">Events &amp; Gatherings</p>
       </div>
-      <a href="https://drive.google.com/drive/folders/1k9PW9ABAWjxAMrReEWGPI6nhpVkDzuVv" target="_blank"
-         class="flex items-center gap-1.5 text-xs text-primary font-semibold hover:underline">
-        <span class="material-symbols-outlined text-sm">folder_open</span>Open in Drive
-      </a>
     </div>
-    <div id="grid-socials" class="masonry"></div>
+    <div id="grid-socials" class="photo-grid"></div>
     <div id="empty-socials" class="hidden text-center py-24 text-on-surface-variant">
       <span class="material-symbols-outlined text-5xl opacity-30 mb-3 block">photo_library</span>
       <p class="text-sm">No photos yet.</p>
@@ -218,7 +236,7 @@
 </footer>
 
 <script>
-  const API_KEY = 'AIzaSyCDZBOGYelN6fJ0aU98yDb9kZxy3oYNv0Q'; // ← replace
+  const API_KEY = 'AIzaSyCDZBOGYelN6fJ0aU98yDb9kZxy3oYNv0Q';
 
   const FOLDERS = {
     conferences: '1dJAe9mPmnW9xVHwr_Mb8Q4a9JDYfHxtY',
@@ -250,11 +268,11 @@
 
   function showSkeletons(gridEl) {
     gridEl.innerHTML = '';
-    [180,240,160,200,260,180,220,160].forEach(h => {
+    for (let i = 0; i < 12; i++) {
       const d = document.createElement('div');
-      d.className = 'skeleton-block'; d.style.height = h + 'px';
+      d.className = 'skeleton-item';
       gridEl.appendChild(d);
-    });
+    }
   }
 
   async function fetchDrivePhotos(folderId) {
@@ -266,19 +284,27 @@
     return (await res.json()).files || [];
   }
 
-  function buildMasonryItem(file, images, idx) {
+  function buildPhotoItem(file, images, idx) {
     const thumb = file.thumbnailLink
-      ? file.thumbnailLink.replace('=s220', '=s1200')
+      ? file.thumbnailLink.replace(/=s\d+$/, '=s1200')
       : `https://drive.google.com/thumbnail?id=${file.id}&sz=w1200`;
     const full = `https://lh3.googleusercontent.com/d/${file.id}`;
     images.push(full);
+
     const div = document.createElement('div');
-    div.className = 'masonry-item';
+    div.className = 'photo-item';
+
     const img = document.createElement('img');
-    img.alt = '';
+    img.alt = '';                        /* empty alt — no filename shown */
+    img.decoding = 'async';
     img.src = thumb;
-    img.addEventListener('load', () => img.classList.add('loaded'));
-    img.addEventListener('error', () => { img.src = `https://drive.google.com/thumbnail?id=${file.id}&sz=w800`; });
+    img.addEventListener('load',  () => img.classList.add('loaded'));
+    img.addEventListener('error', () => {
+      /* silent fallback — try lower-res thumbnail, still no filename */
+      img.src = `https://drive.google.com/thumbnail?id=${file.id}&sz=w800`;
+      img.addEventListener('error', () => { div.style.background = '#e0e0e0'; }, { once: true });
+    });
+
     div.appendChild(img);
     div.addEventListener('click', () => lbOpen(images, idx));
     return div;
@@ -293,15 +319,14 @@
       gridEl.innerHTML = '';
       if (!files.length) { gridEl.classList.add('hidden'); emptyEl.classList.remove('hidden'); return; }
       const images = [];
-      files.forEach((f, i) => gridEl.appendChild(buildMasonryItem(f, images, i)));
+      files.forEach((f, i) => gridEl.appendChild(buildPhotoItem(f, images, i)));
     } catch (err) {
       console.warn('Drive API unavailable, fallback:', err);
       gridEl.innerHTML = `
-        <div style="column-span:all" class="rounded-xl overflow-hidden border border-outline-variant/30 shadow-sm">
+        <div style="grid-column:1/-1" class="rounded-xl overflow-hidden border border-outline-variant/30 shadow-sm">
           <iframe style="border:none;width:100%;background:#f4f3f3;border-radius:0.75rem;" height="520"
             src="https://drive.google.com/embeddedfolderview?id=${FOLDERS[key]}#grid" title="Gallery"></iframe>
         </div>`;
-      gridEl.style.cssText = 'display:block';
     }
   }
 
@@ -317,16 +342,7 @@
   const _btn = document.getElementById('mobile-menu-btn');
   const _menu = document.getElementById('mobile-menu');
   if (_btn) _btn.addEventListener('click', () => _menu.classList.toggle('hidden'));
+
   const dt = document.getElementById('members-dropdown-trigger');
   const dm = document.getElementById('members-dropdown-menu');
-  if (dt && dm) {
-    dt.addEventListener('click', (e) => { e.stopPropagation(); dm.classList.toggle('open'); });
-    document.addEventListener('click', () => dm.classList.remove('open'));
-    dm.addEventListener('click', (e) => e.stopPropagation());
-  }
-
-  loaded.conferences = true;
-  loadSection('conferences');
-</script>
-</body>
-</html>
+  if
