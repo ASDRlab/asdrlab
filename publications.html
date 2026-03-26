@@ -395,6 +395,18 @@
   const _navBtn = document.getElementById('mobile-menu-btn');
   const _navMenu = document.getElementById('mobile-menu');
   if (_navBtn) _navBtn.addEventListener('click', () => _navMenu.classList.toggle('hidden'));
+
+  // Desktop Members dropdown
+  const _dropBtn = document.getElementById('members-dropdown-trigger');
+  const _dropMenu = document.getElementById('members-dropdown-menu');
+  if (_dropBtn && _dropMenu) {
+    _dropBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      _dropMenu.classList.toggle('open');
+    });
+    document.addEventListener('click', () => _dropMenu.classList.remove('open'));
+    _dropMenu.addEventListener('click', (e) => e.stopPropagation());
+  }
 </script>
 </div><!-- end panel-papers -->
 
