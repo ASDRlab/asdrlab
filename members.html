@@ -41,51 +41,15 @@
   .member-card { background: #ffffff; border: 1px solid #f0f0f0; box-shadow: 0 2px 12px -2px rgba(0,0,0,0.05); transition: box-shadow 0.3s ease, transform 0.3s ease; border-radius: 1rem; overflow: hidden; }
   .member-card:hover { box-shadow: 0 8px 28px -4px rgba(36,135,140,0.10); transform: translateY(-1px); }
   .member-photo { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
-
-  .glass-nav {
-    background-color: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-  .nav-link {
-    position: relative;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #3e4949;
-    transition: color 0.2s;
-  }
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #24878C;
-    transition: width 0.2s;
-  }
+  .glass-nav { background-color: rgba(255,255,255,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+  .nav-link { position: relative; font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500; color: #3e4949; transition: color 0.2s; }
+  .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #24878C; transition: width 0.2s; }
   .nav-link:hover { color: #24878C; }
   .nav-link:hover::after { width: 100%; }
   .nav-link.active { color: #24878C; }
   .nav-link.active::after { width: 100%; }
-
   .dropdown { position: relative; }
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    border: 1px solid #f0f0f0;
-    border-radius: 0.75rem;
-    box-shadow: 0 8px 24px -4px rgba(0,0,0,0.10);
-    min-width: 180px;
-    z-index: 100;
-    overflow: hidden;
-    padding: 4px 0;
-  }
+  .dropdown-menu { display: none; position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: white; border: 1px solid #f0f0f0; border-radius: 0.75rem; box-shadow: 0 8px 24px -4px rgba(0,0,0,0.10); min-width: 180px; z-index: 100; overflow: hidden; padding: 4px 0; }
   .dropdown-menu.open { display: block; }
   .dropdown-menu a { display: block; padding: 0.65rem 1.2rem; font-size: 0.8rem; font-weight: 500; color: #3e4949; transition: background 0.15s, color 0.15s; white-space: nowrap; }
   .dropdown-menu a:hover { background: #f4f3f3; color: #00666b; }
@@ -93,29 +57,29 @@
 </style>
 </head>
 <body class="bg-white text-on-surface antialiased no-scrollbar">
-<!-- Top Navigation Bar -->
+
+<!-- Nav -->
 <nav class="glass-nav fixed top-0 left-0 right-0 z-50 border-b border-slate-100">
   <div class="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
     <a href="index.html" class="flex items-center">
       <img src="Lab-Logo.jpg" alt="ASDR Lab" class="h-9 w-auto object-contain"/>
     </a>
     <div class="hidden md:flex items-center gap-8">
-      <a href="index.html" class="nav-link ">Home</a>
-      <a href="research.html" class="nav-link ">Research</a>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="research.html" class="nav-link">Research</a>
       <div class="dropdown">
         <button id="members-dropdown-trigger" class="nav-link active" style="background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;gap:4px;">
-          Members
-          <span style="font-size:10px;opacity:0.6;">▾</span>
+          Members <span style="font-size:10px;opacity:0.6;">▾</span>
         </button>
         <div id="members-dropdown-menu" class="dropdown-menu">
-          <a href="pi.html" class="">Principal Investigator</a>
+          <a href="pi.html">Principal Investigator</a>
           <a href="members.html" class="active">Current Members</a>
-          <a href="alumni.html" class="">Alumni</a>
+          <a href="alumni.html">Alumni</a>
         </div>
       </div>
-      <a href="publications.html" class="nav-link ">Publications</a>
-      <a href="gallery.html" class="nav-link ">Gallery</a>
-      <a href="contact.html" class="nav-link ">Contact</a>
+      <a href="publications.html" class="nav-link">Publications</a>
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="contact.html" class="nav-link">Contact</a>
     </div>
     <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-surface-container transition-colors" aria-label="Open menu">
       <span class="material-symbols-outlined text-on-surface-variant">menu</span>
@@ -128,9 +92,9 @@
       <div class="pl-0">
         <span class="text-xs font-bold text-primary uppercase tracking-widest block mb-2">Members</span>
         <div class="pl-4 flex flex-col gap-2">
-          <a href="pi.html" class="nav-link text-sm ">Principal Investigator</a>
+          <a href="pi.html" class="nav-link text-sm">Principal Investigator</a>
           <a href="members.html" class="nav-link text-sm active">Current Members</a>
-          <a href="alumni.html" class="nav-link text-sm ">Alumni</a>
+          <a href="alumni.html" class="nav-link text-sm">Alumni</a>
         </div>
       </div>
       <a href="publications.html" class="nav-link">Publications</a>
@@ -139,11 +103,13 @@
     </div>
   </div>
 </nav>
+
 <main class="flex flex-col items-center pt-16 py-16 px-4 md:px-12">
   <header class="w-full max-w-2xl mb-20 mt-8">
     <span class="font-label text-base tracking-widest uppercase text-primary font-bold mb-4 block">ASDR Lab · People</span>
     <h1 class="font-headline text-6xl md:text-7xl font-extrabold tracking-tighter text-on-surface">Members</h1>
   </header>
+
   <div class="w-full max-w-2xl space-y-20">
 
     <!-- Graduate Students -->
@@ -218,6 +184,7 @@
         <span class="font-body text-xs uppercase tracking-[0.1em] text-outline-variant font-bold whitespace-nowrap">Research Interns</span>
       </div>
       <div class="space-y-4">
+
         <div class="member-card flex flex-col sm:flex-row items-stretch">
           <div class="w-full sm:w-32 h-52 sm:h-auto flex-shrink-0 bg-surface-container-high">
             <img alt="Seo Dae Kyoung" class="member-photo" src="SeoDaeKyoung.png"/>
@@ -230,27 +197,26 @@
             <a class="text-xs text-primary hover:underline flex items-center gap-1 font-medium mt-1" href="mailto:kingdum0515@kumoh.ac.kr"><span class="material-symbols-outlined text-[14px]">mail</span> kingdum0515@kumoh.ac.kr</a>
           </div>
         </div>
-         <div class="member-card flex flex-col sm:flex-row items-stretch">
+
+        <div class="member-card flex flex-col sm:flex-row items-stretch">
           <div class="w-full sm:w-32 h-52 sm:h-auto flex-shrink-0 bg-surface-container-high">
-            <img alt="Seo Dae Kyoung" class="member-photo" src="SeoDaeKyoung.png"/>
+            <img alt="Jae Kyoung Kim" class="member-photo" src="JaeKyungKim.jpg"/>
           </div>
           <div class="flex flex-col flex-grow min-w-0 p-5 gap-2 justify-center">
             <span class="text-[11px] font-bold text-primary uppercase tracking-[0.15em]">UG Student (exp. 2026)</span>
             <h5 class="font-headline font-bold text-lg text-on-surface leading-tight">Jae Kyoung Kim <span class="text-sm font-normal text-on-surface-variant">김제경</span></h5>
             <p class="text-sm text-on-surface-variant leading-relaxed">Material synthesis, triboelectric nanogenerator.</p>
             <p class="text-xs italic text-on-surface-variant opacity-60">"Seize the day."</p>
-            <a class="text-xs text-primary hover:underline flex items-center gap-1 font-medium mt-1" href="mailto:kingdum0515@kumoh.ac.kr"><span class="material-symbols-outlined text-[14px]">mail</span> spacekim11@kumoh.ac.kr</a>
-          </div>
-            <div class="member-card flex flex-col sm:flex-row items-stretch">
-          <div class="w-full sm:w-32 h-52 sm:h-auto flex-shrink-0 bg-surface-container-high">
-            <img alt="Seo Dae Kyoung" class="member-photo" src="JaeKyungKim.jpg"/>
+            <a class="text-xs text-primary hover:underline flex items-center gap-1 font-medium mt-1" href="mailto:spacekim11@kumoh.ac.kr"><span class="material-symbols-outlined text-[14px]">mail</span> spacekim11@kumoh.ac.kr</a>
           </div>
         </div>
+
       </div>
     </section>
 
   </div>
 </main>
+
 <!-- Footer -->
 <footer class="mt-16 pt-12 pb-12 border-t border-slate-100 w-full text-center px-8">
   <div class="max-w-7xl mx-auto">
@@ -270,12 +236,10 @@
 </footer>
 
 <script>
-  // Mobile menu
   const _btn = document.getElementById('mobile-menu-btn');
   const _menu = document.getElementById('mobile-menu');
   if (_btn) _btn.addEventListener('click', () => _menu.classList.toggle('hidden'));
 
-  // Members dropdown - click toggle
   const dropdownTrigger = document.getElementById('members-dropdown-trigger');
   const dropdownMenu = document.getElementById('members-dropdown-menu');
   if (dropdownTrigger && dropdownMenu) {
@@ -283,10 +247,9 @@
       e.stopPropagation();
       dropdownMenu.classList.toggle('open');
     });
-    document.addEventListener('click', () => {
-      dropdownMenu.classList.remove('open');
-    });
+    document.addEventListener('click', () => dropdownMenu.classList.remove('open'));
     dropdownMenu.addEventListener('click', (e) => e.stopPropagation());
   }
 </script>
-</body></html>
+</body>
+</html>
