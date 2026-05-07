@@ -34,7 +34,7 @@
       position: fixed; top: 50%; transform: translateY(-50%);
       background: none; border: none; cursor: pointer;
       padding: 16px; color: rgba(255,255,255,.7);
-      font-size: 28px; line-height: 1;
+      font-size: 36px; line-height: 1;
       transition: color .15s;
     }
     .lb-btn:hover { color: #fff; }
@@ -48,16 +48,30 @@
     }
     #lb-close:hover { color: #fff; }
 
-    /* ── Masonry grid ── */
-    .gallery-count {
-      font-size: 13px;
-      color: #888;
-      margin-bottom: 20px;
+    /* ── Gallery ── */
+    .gallery-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
     }
-    .masonry {
-      columns: 3;
-      column-gap: 8px;
+    .gallery-header { margin-bottom: 36px; }
+    .gallery-header .eyebrow {
+      font-size: 13px; color: #888;
+      text-transform: uppercase; letter-spacing: .08em;
+      margin: 0 0 8px;
     }
+    .gallery-header h1 {
+      margin: 0 0 6px; font-size: 32px; font-weight: 600;
+    }
+    .gallery-header p {
+      margin: 0; color: #666; font-size: 15px;
+    }
+    .gallery-meta {
+      font-size: 13px; color: #aaa; margin-bottom: 16px;
+    }
+
+    /* masonry */
+    .masonry { columns: 3; column-gap: 8px; }
     @media (max-width: 768px) { .masonry { columns: 2; } }
     @media (max-width: 480px) { .masonry { columns: 1; } }
 
@@ -68,52 +82,40 @@
       overflow: hidden;
       cursor: pointer;
       position: relative;
-      background: #f0f0f0;
+      background: #ebebeb;
     }
     .photo-item img {
-      width: 100%;
-      display: block;
-      opacity: 0;
-      transition: opacity .3s;
+      width: 100%; display: block;
+      opacity: 0; transition: opacity .3s;
     }
     .photo-item img.loaded { opacity: 1; }
-    .photo-item .hover-caption {
+    .photo-item .cap {
       position: absolute; inset: 0;
       background: rgba(0,0,0,0);
       display: flex; align-items: flex-end;
       padding: 12px;
       transition: background .2s;
     }
-    .photo-item:hover .hover-caption {
-      background: rgba(0,0,0,.3);
-    }
-    .hover-caption span {
-      color: #fff;
-      font-size: 12px;
-      opacity: 0;
+    .photo-item:hover .cap { background: rgba(0,0,0,.3); }
+    .cap span {
+      color: #fff; font-size: 12px; opacity: 0;
       transition: opacity .2s;
       text-shadow: 0 1px 3px rgba(0,0,0,.5);
     }
-    .photo-item:hover .hover-caption span { opacity: 1; }
+    .photo-item:hover .cap span { opacity: 1; }
 
     /* skeleton */
-    .skeleton {
-      break-inside: avoid;
-      margin-bottom: 8px;
-      border-radius: 6px;
-      background: #e8e8e8;
+    .sk {
+      break-inside: avoid; margin-bottom: 8px;
+      border-radius: 6px; background: #e4e4e4;
       animation: pulse 1.4s ease-in-out infinite;
     }
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: .5; }
+      0%,100% { opacity:1; } 50% { opacity:.45; }
     }
-
     .gallery-empty {
-      text-align: center;
-      padding: 60px 0;
-      color: #aaa;
-      font-size: 15px;
+      display: none; text-align: center;
+      padding: 80px 0; color: #aaa; font-size: 15px;
     }
   </style>
 </head>
@@ -129,41 +131,79 @@
     <button class="lb-btn" id="lb-next" aria-label="Next">&#x203a;</button>
   </div>
 
-  <!-- ── Nav (기존 사이트와 동일) ── -->
-  <header> <!-- 기존 nav 코드를 여기에 그대로 유지 --> </header>
-
-  <!-- ── Main ── -->
-  <main style="max-width: 1100px; margin: 0 auto; padding: 60px 24px 80px;">
-    <div style="margin-bottom: 36px;">
-      <p style="font-size: 13px; color: #888; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 8px;">Gallery</p>
-      <h1 style="margin: 0 0 6px; font-size: 32px; font-weight: 600;">Lab in Photos.</h1>
-      <p style="margin: 0; color: #666; font-size: 15px;">Conferences, lab events, and everyday moments.</p>
+  <!-- ── Nav ── -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="Lab-Logo.jpg" alt="ASDR Lab" />
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <div class="dropdown">
+          <button class="dropdown-trigger" id="members-dropdown-trigger">
+            Members <span>&#x25BE;</span>
+          </button>
+          <div class="dropdown-menu" id="members-dropdown-menu">
+            <a href="pi.html">Principal Investigator</a>
+            <a href="members.html">Current Members</a>
+            <a href="alumni.html">Alumni</a>
+          </div>
+        </div>
+        <a href="publications.html">Publications</a>
+        <a href="gallery.html" class="active">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">menu</button>
     </div>
+    <div class="mobile-menu hidden" id="mobile-menu">
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <div class="mobile-dropdown">
+        <p>Members</p>
+        <a href="pi.html">Principal Investigator</a>
+        <a href="members.html">Current Members</a>
+        <a href="alumni.html">Alumni</a>
+      </div>
+      <a href="publications.html">Publications</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
 
-    <p class="gallery-count" id="photo-count"></p>
+  <!-- ── Gallery ── -->
+  <main class="gallery-section">
+    <div class="gallery-header">
+      <p class="eyebrow">Gallery</p>
+      <h1>Lab in Photos.</h1>
+      <p>Conferences, lab events, and everyday moments.</p>
+    </div>
+    <p class="gallery-meta" id="gallery-meta"></p>
     <div class="masonry" id="masonry"></div>
-    <div class="gallery-empty" id="gallery-empty" style="display:none;">
-      No photos yet.
-    </div>
+    <div class="gallery-empty" id="gallery-empty">No photos yet.</div>
   </main>
 
-  <!-- ── Footer (기존과 동일) ── -->
-  <footer> <!-- 기존 footer 코드 --> </footer>
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-name">ASDR Lab</p>
+        <p class="footer-sub">Advanced Surface Devices Research Lab</p>
+        <p class="footer-sub">Kumoh National Institute of Technology, Gumi, South Korea</p>
+      </div>
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="members.html">Members</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <p class="footer-copy">© 2026 ASDR Lab. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script>
-    /* ════════════════════════════════════
-       gallery.json 형식 (images/ 폴더 안에 저장):
-       {
-         "photos": [
-           { "src": "images/gallery/photo1.jpg", "caption": "KST 2025" },
-           { "src": "images/gallery/photo2.jpg", "caption": "랩 MT" },
-           { "src": "images/gallery/photo3.jpg", "caption": "" }
-         ]
-       }
-    ════════════════════════════════════ */
-
-    const GALLERY_JSON = 'gallery.json'; // 경로 필요시 수정
-
     /* ── Lightbox ── */
     let LB = { photos: [], idx: 0 };
 
@@ -174,13 +214,13 @@
       document.body.style.overflow = 'hidden';
     }
     function lbRender() {
-      const img = document.getElementById('lb-img');
+      var img = document.getElementById('lb-img');
       img.style.opacity = 0;
       img.src = LB.photos[LB.idx].src;
       img.alt = LB.photos[LB.idx].caption || '';
-      img.onload = () => { img.style.opacity = 1; };
+      img.onload = function() { img.style.opacity = 1; };
       document.getElementById('lb-caption').textContent = LB.photos[LB.idx].caption || '';
-      document.getElementById('lb-counter').textContent = `${LB.idx + 1} / ${LB.photos.length}`;
+      document.getElementById('lb-counter').textContent = (LB.idx + 1) + ' / ' + LB.photos.length;
     }
     function lbClose() {
       document.getElementById('lb').classList.remove('open');
@@ -192,85 +232,99 @@
     }
 
     document.getElementById('lb-close').onclick = lbClose;
-    document.getElementById('lb-prev').onclick = e => { e.stopPropagation(); lbStep(-1); };
-    document.getElementById('lb-next').onclick = e => { e.stopPropagation(); lbStep(1); };
-    document.getElementById('lb').onclick = e => { if (e.target.id === 'lb') lbClose(); };
-    document.addEventListener('keydown', e => {
+    document.getElementById('lb-prev').onclick = function(e) { e.stopPropagation(); lbStep(-1); };
+    document.getElementById('lb-next').onclick = function(e) { e.stopPropagation(); lbStep(1); };
+    document.getElementById('lb').onclick = function(e) { if (e.target.id === 'lb') lbClose(); };
+    document.addEventListener('keydown', function(e) {
       if (!document.getElementById('lb').classList.contains('open')) return;
       if (e.key === 'Escape')     lbClose();
       if (e.key === 'ArrowLeft')  lbStep(-1);
       if (e.key === 'ArrowRight') lbStep(1);
     });
 
-    /* ── Skeleton placeholders ── */
-    function showSkeletons(n = 12) {
-      const grid = document.getElementById('masonry');
-      grid.innerHTML = '';
-      // 다양한 높이로 자연스러운 masonry 느낌
-      const heights = [140, 200, 160, 220, 150, 180, 170, 210, 145, 190, 165, 200];
-      for (let i = 0; i < n; i++) {
-        const d = document.createElement('div');
-        d.className = 'skeleton';
-        d.style.height = heights[i % heights.length] + 'px';
-        grid.appendChild(d);
+    /* ── Skeleton ── */
+    var HEIGHTS = [140,200,160,220,150,180,170,210,145,190,165,200];
+    function showSkeletons() {
+      var g = document.getElementById('masonry');
+      g.innerHTML = '';
+      for (var i = 0; i < 12; i++) {
+        var d = document.createElement('div');
+        d.className = 'sk';
+        d.style.height = HEIGHTS[i % HEIGHTS.length] + 'px';
+        g.appendChild(d);
       }
     }
 
     /* ── Build grid ── */
     function buildGrid(photos) {
-      const grid = document.getElementById('masonry');
-      grid.innerHTML = '';
-
+      var g = document.getElementById('masonry');
+      g.innerHTML = '';
       if (!photos.length) {
         document.getElementById('gallery-empty').style.display = 'block';
         return;
       }
-
-      document.getElementById('photo-count').textContent = `${photos.length} photos`;
-
-      photos.forEach((p, i) => {
-        const item = document.createElement('div');
+      document.getElementById('gallery-meta').textContent = photos.length + ' photos';
+      photos.forEach(function(p, i) {
+        var item = document.createElement('div');
         item.className = 'photo-item';
 
-        const img = document.createElement('img');
+        var img = document.createElement('img');
         img.src = p.src;
         img.alt = p.caption || '';
         img.decoding = 'async';
         img.loading = 'lazy';
-        img.addEventListener('load',  () => img.classList.add('loaded'));
-        img.addEventListener('error', () => { item.style.display = 'none'; });
+        img.addEventListener('load',  function() { img.classList.add('loaded'); });
+        img.addEventListener('error', function() { item.style.display = 'none'; });
 
-        const cap = document.createElement('div');
-        cap.className = 'hover-caption';
+        var cap = document.createElement('div');
+        cap.className = 'cap';
         if (p.caption) {
-          const s = document.createElement('span');
+          var s = document.createElement('span');
           s.textContent = p.caption;
           cap.appendChild(s);
         }
 
         item.appendChild(img);
         item.appendChild(cap);
-        item.addEventListener('click', () => lbOpen(photos, i));
-        grid.appendChild(item);
+        item.addEventListener('click', function() { lbOpen(photos, i); });
+        g.appendChild(item);
       });
     }
 
-    /* ── Load ── */
-    async function init() {
+    /* ── Load gallery.json ── */
+    function init() {
       showSkeletons();
-      try {
-        const res = await fetch(GALLERY_JSON);
-        if (!res.ok) throw new Error(res.status);
-        const data = await res.json();
-        buildGrid(data.photos || []);
-      } catch (err) {
-        console.warn('gallery.json 로드 실패:', err);
-        document.getElementById('masonry').innerHTML = '';
-        document.getElementById('gallery-empty').style.display = 'block';
-        document.getElementById('gallery-empty').textContent =
-          'gallery.json 파일을 확인해 주세요.';
-      }
+      fetch('gallery.json')
+        .then(function(r) {
+          if (!r.ok) throw new Error(r.status);
+          return r.json();
+        })
+        .then(function(data) { buildGrid(data.photos || []); })
+        .catch(function(err) {
+          console.warn('gallery.json 로드 실패:', err);
+          document.getElementById('masonry').innerHTML = '';
+          document.getElementById('gallery-empty').style.display = 'block';
+          document.getElementById('gallery-empty').textContent =
+            'gallery.json 파일을 확인해 주세요.';
+        });
     }
+
+    /* ── Mobile nav ── */
+    var menuBtn = document.getElementById('mobile-menu-btn');
+    var mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn) menuBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    /* ── Members dropdown ── */
+    var dt = document.getElementById('members-dropdown-trigger');
+    var dm = document.getElementById('members-dropdown-menu');
+    if (dt) dt.addEventListener('click', function() {
+      dm.classList.toggle('hidden');
+    });
+    document.addEventListener('click', function(e) {
+      if (dt && !dt.contains(e.target)) dm.classList.add('hidden');
+    });
 
     init();
   </script>
