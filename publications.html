@@ -807,4 +807,15 @@
     document.getElementById('tab-' + tab).classList.add('active');
   }
 </script>
-</body></html>
+<script>
+  document.querySelectorAll('a[href]:not([href="#"])').forEach(function(a) {
+    if (a.hostname && a.hostname !== location.hostname) {
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener noreferrer');
+    }
+  });
+</script>
+
+</body>
+</html>
+
